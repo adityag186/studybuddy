@@ -1,15 +1,13 @@
-﻿(function () {
+﻿
+(function() {
     'use strict';
 
-    angular
-        .module('app')
-        .factory('UserService', UserService);
+    angular.module('app').factory('UserService', UserService);
 
     UserService.$inject = ['$timeout', '$filter', '$q'];
+
     function UserService($timeout, $filter, $q) {
-
         var service = {};
-
         service.GetAll = GetAll;
         service.GetById = GetById;
         service.GetByUsername = GetByUsername;
@@ -27,7 +25,9 @@
 
         function GetById(id) {
             var deferred = $q.defer();
-            var filtered = $filter('filter')(getUsers(), { id: id });
+            var filtered = $filter('filter')(getUsers(), {
+                id: id
+            });
             var user = filtered.length ? filtered[0] : null;
             deferred.resolve(user);
             return deferred.promise;
@@ -35,7 +35,9 @@
 
         function GetByUsername(username) {
             var deferred = $q.defer();
-            var filtered = $filter('filter')(getUsers(), { username: username });
+            var filtered = $filter('filter')(getUsers(), {
+                username: username
+            });
             var user = filtered.length ? filtered[0] : null;
             deferred.resolve(user);
             return deferred.promise;
@@ -45,23 +47,30 @@
             var deferred = $q.defer();
 
             // simulate api call with $timeout
-            $timeout(function () {
+            $timeout(function() {
                 GetByUsername(user.username)
-                    .then(function (duplicateUser) {
+                    .then(function(duplicateUser) {
                         if (duplicateUser !== null) {
-                            deferred.resolve({ success: false, message: 'Username "' + user.username + '" is already taken' });
+                            deferred.resolve({
+                                success: false,
+                                message: 'Username "' + user.username + '" is already taken'
+                            });
                         } else {
                             var users = getUsers();
 
                             // assign id
-                            var lastUser = users[users.length - 1] || { id: 0 };
+                            var lastUser = users[users.length - 1] || {
+                                id: 0
+                            };
                             user.id = lastUser.id + 1;
 
                             // save to local storage
                             users.push(user);
                             setUsers(users);
 
-                            deferred.resolve({ success: true });
+                            deferred.resolve({
+                                success: true
+                            });
                         }
                     });
             }, 1000);
@@ -105,7 +114,7 @@
         // private functions
 
         function getUsers() {
-            if(!localStorage.users){
+            if (!localStorage.users) {
                 localStorage.users = JSON.stringify([]);
             }
 
