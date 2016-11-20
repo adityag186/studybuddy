@@ -25,15 +25,15 @@
         <th>
           Course
         </th>
-        <tr>
+        <tr ng-repeat="user in vm.allUsers" ng-if="user.course === vm.user.course">
             <td>
-                {{vm.user.firstName + " " +vm.user.lastName}}
+                {{user.firstName + " " + user.lastName}}
             </td>
             <td>
-                {{vm.user.username}}
+                {{user.username}}
             </td>
             <td>
-              {{vm.user.course}}
+              {{user.course}}
             </td>
         </tr>
     </table>
