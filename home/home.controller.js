@@ -7,11 +7,11 @@
 
     HomeController.$inject = ['UserService', '$rootScope'];
     function HomeController(UserService, $rootScope) {
-        var vm = this;
+        var me = this;
 
-        vm.user = null;
-        vm.allUsers = [];
-        vm.deleteUser = deleteUser;
+        me.user = null;
+        me.allUsers = [];
+        me.deleteUser = deleteUser;
 
         initController();
 
@@ -23,14 +23,14 @@
         function loadCurrentUser() {
             UserService.GetByUsername($rootScope.globals.currentUser.username)
                 .then(function (user) {
-                    vm.user = user;
+                    me.user = user;
                 });
         }
 
         function loadAllUsers() {
             UserService.GetAll()
                 .then(function (users) {
-                    vm.allUsers = users;
+                    me.allUsers = users;
                 });
         }
 
