@@ -12,6 +12,8 @@
         service.Create = Create;
         service.Update = Update;
         service.Delete = Delete;
+        service.Course = Course;
+
         return service;
 
         function GetAll() {
@@ -29,6 +31,10 @@
         function Create(user) {
             return $http.post('/api/users', user).then(handleSuccess, handleError('Error creating user'));
         }
+
+        // function Course(course) {
+        //     return $http.post('/api/course', course).then(handleSuccess, handleError('Error adding course'));
+        // }
 
         function Update(user) {
             return $http.put('/api/users/' + user.id, user).then(handleSuccess, handleError('Error updating user'));

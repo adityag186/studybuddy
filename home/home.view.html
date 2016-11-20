@@ -1,11 +1,43 @@
-﻿<h1>Hi {{vm.user.firstName}}!</h1>
+<!DOCTYPE html>
+<h3>Hi {{vm.user.firstName}}, you have selected the following course {{vm.user.course}}</h3>
 <p>You're logged in!!</p>
 <h3>All registered users:</h3>
 <ul>
     <li ng-repeat="user in vm.allUsers">
-        {{user.username}} ({{user.firstName}} {{user.lastName}})
-        - <a href="#" ng-click="vm.deleteUser(user.id)">Delete</a>
+        {{user.username}} ({{user.firstName}} {{user.lastName}} {{user.course}}) - <a href="#" ng-click="vm.deleteUser(user.id)">Delete</a>
     </li>
 </ul>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">{{vm.user.course}}</div>
+    <div class="panel-body">
+        <p>These are the following users for {{vm.user.course}}</p>
+    </div>
+
+    <!-- Table -->
+    <table class="table">
+        <th>
+            Full Name
+        </th>
+        <th>
+            Usernames
+        </th>
+        <th>
+          Course
+        </th>
+        <tr>
+            <td>
+                {{vm.user.firstName + " " +vm.user.lastName}}
+            </td>
+            <td>
+                {{vm.user.username}}
+            </td>
+            <td>
+              {{vm.user.course}}
+            </td>
+        </tr>
+    </table>
+</div>
+
 <p>&nbsp;</p>
 <p><a href="#/login" class="btn btn-primary">Logout</a></p>
